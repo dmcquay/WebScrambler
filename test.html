@@ -1,0 +1,55 @@
+<html>
+<head>
+<script type="text/javascript" src="Scrambler.js"></script>
+<style type="text/css">
+.success { color: green; }
+.failure { color: red; }
+</style>
+</head>
+<body>
+<p id="test-sentence">This is a test sentence.</p>
+<table id="test-output"></table>
+<pre>
+<script type="text/javascript">
+Scrambler.scramble();
+
+function displayTestResultTable(boolVal, message) {
+	var outputTableEl = document.getElementById('test-output');
+	var tr = document.createElement('tr');
+	var td = document.createElement('td');
+	td.appendChild(document.createTextNode(message));
+	tr.appendChild(td);
+	if (boolVal) {
+		td = document.createElement('td');
+		td.appendChild(document.createTextNode('Success'));
+		td.className = 'success';
+		tr.appendChild(td);
+	} else {
+		td = document.createElement('td');
+		td.appendChild(document.createTextNode('Failed'));
+		td.className = 'failure';
+		tr.appendChild(td);
+	}
+	outputTableEl.appendChild(tr);
+}
+
+function displayTestResultPlain(boolVal, message) {
+	document.write((boolVal ? 'Success' : 'Failure') + "\t" + message + "\n");
+}
+
+function assert(boolVal, message) {
+	displayTestResultPlain(boolVal, message);
+}
+
+assert(Scrambler.scrambleWord("Dustin").length == 6, 'scrambleWord returns word with correct length');
+assert(Scrambler.scrambleWord("Dustin") != "Dustin", 'scrambleWord returns different word');
+assert(Scrambler.scrambleText("This is a sentence.").length == 19, 'scrambleText returns correct length sentence');
+assert(Scrambler.scrambleText("This is a sentence.") != "This is a sentence", 'scrambleText returns changed content');
+assert(!Scrambler.isTextNode(document.getElementById('test-sentence')), 'paragraph node is not a text node');
+assert(Scrambler.isTextNode(document.getElementById('test-sentence').childNodes[0]), 'paragraph node is not a text node');
+
+Scrambler.scramble();
+</script>
+</pre>
+</body>
+</html>
