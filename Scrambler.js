@@ -18,9 +18,7 @@ Scrambler.isTextNode = function(node) {
 };
 
 Scrambler.scrambleWordsInTextNode = function(textNode) {
-	console.log('scrambling ' + textNode.data);
 	textNode.data = Scrambler.scrambleText(textNode.data);
-	console.log('done: ' + textNode.data);
 };
 
 Scrambler.scrambleText = function(text) {
